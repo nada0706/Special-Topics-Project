@@ -21,6 +21,9 @@ Data model:
 -	
 Restful API:
 Search of Leads
+
 GET /api/v1/leads
+
 Search leads by status
+
 GET /api/v1/leads?status=active
