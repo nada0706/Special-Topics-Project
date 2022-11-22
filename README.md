@@ -27,3 +27,9 @@ GET /api/v1/leads
 Search leads by status
 
 GET /api/v1/leads?status=active
+
+
+USE CASES Diagrams
+![use case restapi drawio](https://user-images.githubusercontent.com/92259283/203331057-1dbfba70-5ecc-4ac8-bae0-51130402ccd2.png)
+![use cases lead drawio](https://user-images.githubusercontent.com/92259283/203331135-043c2fed-854e-4879-b573-59d9cbea97ef.png)
+![use case client drawio](https://user-images.githubusercontent.com/92259283/203331153-760a9042-0a55-488f-b892-28f47d94c139.png)
