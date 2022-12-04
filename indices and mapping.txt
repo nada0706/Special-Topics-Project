@@ -1,0 +1,51 @@
+POST client/_doc
+{
+  "username": "Mary Johnson",
+  "firstName": "John",
+  "lastName": "James",
+  "email": "john@email.com"
+}
+
+GET client/_search
+
+POST client/_bulk
+{"index": {"_id": "1"}}
+{"username": "Nada Ahmed", "firstName": "Nada", "lastName": "Ahmed", "email": "nada@email.com"}
+{"index": {"_id": "2"}}
+{"username": "Cata Sibisanu", "firstName": "Cata", "lastName": "Sibisanu", "email": "cata@email.com"}
+{"index": {"_id": "3"}}
+{"username": "Kata Ampleev", "firstName": "Kata", "lastName": "Ampleev", "email": "kata@email.com"}
+{"index": {"_id": "4"}}
+{"username": "Yasmin Hamid", "firstName": "Yasmin", "lastName": "Hamid", "email": "yasmin@email.com"}
+
+POST leads/_doc
+{
+  "id": 1,
+  "name": "lead1",
+  "status": "activated"
+}
+
+GET leads/_search
+
+POST leads/_bulk
+{"index": {"_id": "2"}}
+{"name": "lead2", "status": "activated"}
+{"index": {"_id": "3"}}
+{"name": "lead3", "status": "deactivated"}
+{"index": {"_id": "4"}}
+{"name": "lead4", "status": "deactivated"}
+{"index": {"_id": "5"}}
+{"name": "lead5", "status": "activated"}
+
+GET _cat/indices
+
+GET leads/_mapping
+
+GET client/_mapping
+
+
+
+
+
+
+
