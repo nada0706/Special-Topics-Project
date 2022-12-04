@@ -33,3 +33,56 @@ USE CASES Diagrams
 ![use case restapi drawio](https://user-images.githubusercontent.com/92259283/203331057-1dbfba70-5ecc-4ac8-bae0-51130402ccd2.png)
 ![use cases lead drawio](https://user-images.githubusercontent.com/92259283/203331135-043c2fed-854e-4879-b573-59d9cbea97ef.png)
 ![use case client drawio](https://user-images.githubusercontent.com/92259283/203331153-760a9042-0a55-488f-b892-28f47d94c139.png)
+
+
+
+
+
+
+POST client/_doc
+{
+  "username": "Mary Johnson",
+  "firstName": "John",
+  "lastName": "James",
+  "email": "john@email.com"
+}
+
+GET client/_search
+
+POST client/_bulk
+{"index": {"_id": "1"}}
+{"username": "Nada Ahmed", "firstName": "Nada", "lastName": "Ahmed", "email": "nada@email.com"}
+{"index": {"_id": "2"}}
+{"username": "Cata Sibisanu", "firstName": "Cata", "lastName": "Sibisanu", "email": "cata@email.com"}
+{"index": {"_id": "3"}}
+{"username": "Kata Ampleev", "firstName": "Kata", "lastName": "Ampleev", "email": "kata@email.com"}
+{"index": {"_id": "4"}}
+{"username": "Yasmin Hamid", "firstName": "Yasmin", "lastName": "Hamid", "email": "yasmin@email.com"}
+
+POST leads/_doc
+{
+  "id": 1,
+  "name": "lead1",
+  "status": "activated"
+}
+
+GET leads/_search
+
+POST leads/_bulk
+{"index": {"_id": "2"}}
+{"name": "lead2", "status": "activated"}
+{"index": {"_id": "3"}}
+{"name": "lead3", "status": "deactivated"}
+{"index": {"_id": "4"}}
+{"name": "lead4", "status": "deactivated"}
+{"index": {"_id": "5"}}
+{"name": "lead5", "status": "activated"}
+
+GET _cat/indices
+
+GET leads/_mapping
+
+GET client/_mapping
+
+
+
