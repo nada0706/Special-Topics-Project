@@ -18,7 +18,7 @@ Use cases:
 Data model:
 -	Lead
 -	Customer
--	
+
 Restful API:
 Search of Leads
 
