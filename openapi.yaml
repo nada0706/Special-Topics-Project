@@ -1,0 +1,383 @@
+openapi: 3.0.3
+info:
+  title: Swagger Lead Management - OpenAPI 3.0
+  description: >-
+    Lead management is the process of gathering leads, tracking all interactions
+    with your company, such as email, chat, or website activity, and qualifying
+    and engaging them until they buy your product. 
+
+
+    Some useful links:
+
+    - [Github project
+    repository](https://github.com/nada0706/Special-Topics-Project)
+
+    - [Lead management
+    info](https://www.bigcommerce.com/ecommerce-answers/what-is-lead-management/)
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://leadmanagement.swagger.io/api/v3
+tags:
+  - name: leads
+    description: Everything about leads
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: clients
+    description: Access to clients
+    externalDocs:
+      description: Find out more about our store
+      url: http://swagger.io
+paths:
+  /api/v1/leads/{leadId}:
+    put:
+      tags:
+        - leads
+      summary: Find lead by ID
+      description: Returns a single lead
+      operationId: putLeadById
+      parameters:
+        - name: leadId
+          in: path
+          description: ID of lead to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lead'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Lead not found
+        '405':
+          description: Validation exception
+      security:
+        - leadmanagement_auth:
+            - write:leads
+            - read:leads
+    get:
+      tags:
+        - leads
+      summary: Find lead by ID
+      description: Returns a single lead
+      operationId: getLeadById
+      parameters:
+        - name: leadId
+          in: path
+          description: ID of lead to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lead'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Lead'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Lead not found
+      security:
+        - api_key: []
+        - leadmanagement_auth:
+            - write:leads
+            - read:leads
+    delete:
+      tags:
+        - leads
+      summary: Deletes a lead
+      description: delete a lead
+      operationId: deleteLead
+      parameters:
+        - name: leadId
+          in: path
+          description: Lead id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid lead value
+      security:
+        - leadmanagement_auth:
+            - write:leads
+            - read:leads
+  /api/v1/leads:
+    get:
+      tags:
+        - leads
+      summary: Finds leads by status
+      description: Multiple status values can be provided with comma separated strings
+      operationId: findLeadsByStatus
+      parameters:
+        - in: query
+          name: status
+          description: Status values that need to be considered for filter
+          required: false
+          schema:
+            type: string
+            default: active
+            enum:
+              - active
+              - inactive
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lead'
+        '400':
+          description: Invalid status value
+      security:
+        - leadmanagement_auth:
+            - write:leads
+            - read:leads
+    post:
+      tags:
+        - leads
+      summary: Updates a lead in the database
+      description: ''
+      operationId: updateLeadWithData
+      responses:
+        '405':
+          description: Invalid input
+      security:
+        - leadmanagement_auth:
+            - write:leads
+            - read:leads
+#######################################
+  /api/v1/clients/{clientId}:
+    put:
+      tags:
+        - clients
+      summary: Find clients by ID
+      description: Returns a single client
+      operationId: putClientById
+      parameters:
+        - name: clientId
+          in: path
+          description: ID of client to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Client not found
+        '405':
+          description: Validation exception
+      security:
+        - leadmanagement_auth:
+            - write:clients
+            - read:clients
+    get:
+      tags:
+        - clients
+      summary: Find client by ID
+      description: Returns a single client
+      operationId: getClientById
+      parameters:
+        - name: clientId
+          in: path
+          description: ID of client to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Client'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Client not found
+      security:
+        - api_key: []
+        - leadmanagement_auth:
+            - write:clients
+            - read:clients
+    delete:
+      tags:
+        - clients
+      summary: Deletes a client
+      description: delete a client
+      operationId: deleteClient
+      parameters:
+        - name: clientId
+          in: path
+          description: Client id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid client value
+      security:
+        - leadmanagement_auth:
+            - write:clients
+            - read:clients
+  /api/v1/clients:
+    get:
+      tags:
+        - clients
+      summary: Finds clients by group
+      description: Each client belongs to one group
+      operationId: findClientsByStatus
+      parameters:
+        - in: query
+          name: group
+          description: Group values that need to be considered for filter
+          required: false
+          schema:
+            type: string
+            default: it
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+        '400':
+          description: Invalid group value
+      security:
+        - leadmanagement_auth:
+            - write:clients
+            - read:clients
+    post:
+      tags:
+        - clients
+      summary: Updates a client in the database
+      description: ''
+      operationId: updateClientWithData
+      responses:
+        '405':
+          description: Invalid input
+      security:
+        - leadmanagement_auth:
+            - write:clients
+            - read:clients
+components:
+  schemas:
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 100000
+        name:
+          type: string
+          example: Mary Johnson
+        contactEmail:
+          type: string
+          example: maryjhonson@microsoft.com
+        company:
+          type: string
+          example: Microsoft
+        group:
+          type: string
+          example: it
+      xml:
+        name: client
+    Lead:
+      required:
+        - name
+        - id
+        - status
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: John Smith
+        email:
+          type: string
+          example: maryjhonson@microsoft.com
+        status:
+          type: string
+          description: lead status
+          enum:
+            - active
+            - inactive
+      xml:
+        name: lead
+  requestBodies:
+    Lead:
+      description: Lead object that needs to be added to the database
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Lead'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Lead'
+  securitySchemes:
+    leadmanagement_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://leadmanagement.swagger.io/oauth/authorize
+          scopes:
+            write:leads: modify leads in your account
+            read:leads: read your leads
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
